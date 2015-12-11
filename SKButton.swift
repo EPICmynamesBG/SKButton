@@ -1,9 +1,9 @@
 /*!
-    SKButton.swift
-    
-    Created by Brandon Groff on 12-10-2015.
+SKButton.swift
 
-    Version: 1.0
+Created by Brandon Groff on 12-10-2015.
+
+Version: 1.0
 
 Copyright (c) 2015 Brandon Groff <mynamesbg@gmail.com>
 
@@ -33,7 +33,7 @@ THE SOFTWARE.
 
 import SpriteKit
 
- /**
+/**
  An object that manages SKButton touches.
  */
 @objc protocol SKButtonDelegate {
@@ -53,14 +53,14 @@ import SpriteKit
 
 /**
  A simple button for SpriteKit.
-*/
+ */
 
 class SKButton: SKNode {
-  
-/* ---- Private Properties ---- */
+    
+    /* ---- Private Properties ---- */
     /*!
-     The visible node
-     */
+    The visible node
+    */
     private var defaultButton: SKSpriteNode
     /*!
     The hidden node that appears when SKButton object is tapped
@@ -83,15 +83,15 @@ class SKButton: SKNode {
     */
     private var shrinkOnTapPrivate: Bool = false
     
-/* ---- Public Properties ---- */
+    /* ---- Public Properties ---- */
     
-    /** 
+    /**
     The object that acts as a delegate for a SpriteKit Button.
     */
     var delegate: SKButtonDelegate?
     /**
-    The offset of the text within the button
-    */
+     The offset of the text within the button
+     */
     var textOffset: CGPoint {
         set (newOffset){
             self.label.position.x = 0 + newOffset.x
@@ -107,6 +107,9 @@ class SKButton: SKNode {
     var text: String {
         set (newText){
             self.label.text = newText
+            if (self.label.frame.size.width > self.size.width){
+                self.size.width = self.label.frame.size.width + 20
+            }
         }
         get {
             return self.label.text!
@@ -137,6 +140,9 @@ class SKButton: SKNode {
     var fontName:String {
         set (newFont){
             self.label.fontName = newFont
+            if (self.label.frame.size.width > self.size.width){
+                self.size.width = self.label.frame.size.width + 20
+            }
         } get {
             return self.label.fontName!
         }
@@ -147,6 +153,10 @@ class SKButton: SKNode {
     var fontSize:CGFloat {
         set (newFontSize){
             self.label.fontSize = newFontSize
+            if (self.label.frame.size.width > self.size.width){
+                self.size.width = self.label.frame.size.width + 20
+            }
+            
         } get {
             return self.label.fontSize
         }
@@ -192,7 +202,7 @@ class SKButton: SKNode {
     }
     /**
      The color of the button
-    */
+     */
     var color: UIColor {
         set (newValue){
             self.defaultButton.color = newValue
@@ -205,7 +215,7 @@ class SKButton: SKNode {
         }
     }
     
-    /** 
+    /**
      Required so XCode doesn't throw warnings
      */
     required init(coder aDecoder: NSCoder) {
@@ -405,12 +415,12 @@ class SKButton: SKNode {
     }
     
     /*!
-     Generates the SKButton's text label
-     
-     - parameter text: the button's text
-     
-     - returns: an <i>SKLabelNode</i> that is the button's text
-     */
+    Generates the SKButton's text label
+    
+    - parameter text: the button's text
+    
+    - returns: an <i>SKLabelNode</i> that is the button's text
+    */
     
     private class func createLabel(text: String) -> SKLabelNode{
         let newLabel:SKLabelNode = SKLabelNode()
@@ -470,7 +480,7 @@ class SKButton: SKNode {
         parentScene.addChild(self)
         self.runAction(SKButtonAnimations.appearAnimation)
     }
-
+    
     /* ---- TOUCH ---- */
     
     /**
@@ -504,7 +514,7 @@ class SKButton: SKNode {
      - parameter touches: SKNode sent multitouch Set
      - parameter event:   SKNode send event
      */
-   internal override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    internal override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if (self.touchCancelled == false){
             self.defaultButton.hidden = false
             self.onTapButton.hidden = true
@@ -517,7 +527,7 @@ class SKButton: SKNode {
      - parameter touches: SKNode sent multitouch Set
      - parameter event:   SKNode send event
      */
-   internal override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    internal override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         self.defaultButton.hidden = false
         self.onTapButton.hidden = true
         self.touchCancelled = true

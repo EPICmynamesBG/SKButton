@@ -45,9 +45,6 @@ class GameScene: SKScene, SKButtonDelegate {
         //shift the text
         self.buttonOne.textOffset = CGPoint(x: -2, y: 10)
         
-        //rotate it using radians
-        self.buttonOne.zRotation = CGFloat(M_PI / 4)
-        
         self.buttonOne.delegate = self
         
         self.addChild(self.buttonOne)
