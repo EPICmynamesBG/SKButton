@@ -3,7 +3,7 @@ SKButton.swift
 
 Created by Brandon Groff on 12-10-2015.
 
-Version: 1.0
+Version: 1.1 - Beta
 
 Copyright (c) 2015 Brandon Groff <mynamesbg@gmail.com>
 
